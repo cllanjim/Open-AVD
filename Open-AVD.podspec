@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
   s.default_subspec = "precompiled"
 
   s.subspec "precompiled" do |ss|
-    ss.preserve_paths         = "public/*.h", './*.a'
-    ss.vendored_libraries   = './*.a'
+    ss.preserve_paths         = "public/*.h", 'lib/*.a'
+    ss.vendored_libraries   = 'lib/*.a'
     ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/avd_sdk/public" }
   end
 end
