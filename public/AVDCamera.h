@@ -26,6 +26,8 @@ enum AVDCameraType
 	*/
 @interface AVDCamera : AVDVideoDevice
 
+- (instancetype) initWithDeviceId:(AVDDeviceId)did name:(NSString*)name;
+
 @property(nonatomic, assign, readonly) enum AVDCameraType type;     /**< 摄像头类型  */
 
 

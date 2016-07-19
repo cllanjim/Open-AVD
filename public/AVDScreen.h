@@ -22,6 +22,7 @@
  */
 @protocol AVDScreenDelegate<NSObject>
 
+@required
 /// 通知
 /** 屏幕窗口状态更改通知
  *
@@ -30,6 +31,8 @@
  * @note 当屏幕窗口状态更改后，房间内所有用户接收到此通知。
  */
 - (void) onScreenStatusNotify:(enum AVDDeviceStatus)status deviceId:(AVDDeviceId)fromId;
+
+@optional
 /** 屏幕窗口数据更改通知
  *
  * @param[in] level 屏幕窗口整形数据。

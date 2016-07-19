@@ -20,6 +20,8 @@
  * 录制回调接口定义了录制管理操作的异步返回。
  */
 @protocol AVDRecordDelegate<NSObject>
+
+@optional
 /// 通知
 /** 创建特定用户录制的异步返回
  *

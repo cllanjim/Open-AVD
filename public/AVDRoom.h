@@ -13,6 +13,42 @@
 #import "AVDUser.h"
 #import "AVDUserManager.h"
 
+/** 房间选项
+ *
+ * @note 房间选项枚举列出了用于设置房间的选项，在以下函数中使用。
+ * @sa setOption
+ * @sa getOption
+ */
+enum AVDRoomOption{
+    ro_video_drop_data,					/**< 值类型为bool, 字符类型为"true" or "false"：表示接收到视频数据后不解码直接丢弃，一般用于模拟客服端做并发测试。
+                                         默认值为false，设置为true后将丢弃该房间所有接收到的视频数据。
+                                         */
+    ro_audio_drop_data,					/**< 值类型为bool, 字符类型为"true" or "false"：表示接收到音频数据后不解码直接丢弃，一般用于模拟客服端做并发测试。
+                                         默认值为false，设置为true后将丢弃该房间所有接收到的音频数据。
+                                         */
+    ro_media_use_dtls,					/**< 值类型为bool, 字符类型为"true" or "false"：表示音视频是否启用DTLS加密，DTLS加密数据更加安全，但是会加重Server
+                                         * 的负担，在UDP丢包严重的网络环境下，媒体链接需要的时间会更多（30%丢包，链接时间10s-40s）。
+                                         * 默认值为true，使用的是DTLS加密方式。
+                                         */
+    ro_room_reconnect_times,			/**< 值类型为int32, 字符类型为"3" or "2"等数字字符：设置每次断线后重连次数。系统默认为重连3次，如需改变需要应用层自己设置。
+                                         */
+    ro_room_connect_timeout,			/**< 值类型为uint32,  字符类型为"3000" or "5000" ：设置链接超时时间，单位毫秒，必须是正数，系统默认是5000毫秒。
+                                         */
+    ro_audio_subscribe_mode,			/**< 值类型为string, 音频订阅模式：字符类型为"autosubscribe" or "nosubscribe"：分别表示自动订阅房间中全部打开的音频 comming soon
+                                         * or 不自动订阅音频；缺省为"autosubscribe"自动订阅模式。
+                                         */
+    ro_audio_option_codec,				/**< 值类型为string, 音频编码算法：字符类型为"isac" or "opus"：分别表示isac语音编码 和 opus音乐编码；缺省为"isac"。 comming soon
+                                         */
+    ro_video_codec_hw_priority,			/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中是否优先使用硬件编码：优先使用硬件编码(true)和优先使用软件编码（false），
+                                         缺省为UDP优先。
+                                         */
+    
+    ro_audio_mixerdata_callback_buffered,/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中混音数据回调是否缓冲为1024sample后回调：缓冲(true)和不缓冲（false），
+                                          缺省为缓冲。
+                                          */
+    ro_video_mixerdata_callback_format, /**< 值类型为MediaCodecInfo.CodecCapabilities中的枚举值, 字符类型为枚举值的字符串，目前支持一下："19" - YUV420Planar or "21" - YUV420SemiPlanar：表示房间中合屏数据回调的格式。缺省为 "19"
+                                         */
+};
 
 @protocol AVDRoomJoinDelegate <NSObject>
 - (void)onJoinResult:(AVDResult)aResult;
@@ -26,15 +62,7 @@
  */
 @protocol AVDRoomDelegate<NSObject>
 
-/// 异步返回
-/** 加入房间操作异步返回
- *
- * @param[in] result 加入错误代码。
- *
- * @sa join
- */
-- (void)onJoinResult:(AVDResult)result;
-
+@required
 /// 指示
 /** 指示用户离开房间
  *
@@ -43,6 +71,23 @@
  *
  */
 - (void)onLeaveIndication:(AVDResult)reason fromUser:(AVDUserId)fromId;
+/// 通知
+/** 房间网络状态通知
+ *
+ * @param[in] status 当前网络状态。
+ *
+ */
+- (void)onConnectionStatus:(enum AVDConnectionStatus)status;
+
+@optional
+/// 异步返回
+/** 加入房间操作异步返回
+ *
+ * @param[in] result 加入错误代码。
+ *
+ * @sa join
+ */
+- (void)onJoinResult:(AVDResult)result;
 
 /// 通知
 /** 透明通道，接收到广播数据通知
@@ -79,13 +124,6 @@
  */
 - (void)onRoomStatusNotify:(enum AVDRoomStatus)status;
 
-/** 房间网络状态通知
- *
- * @param[in] status 当前网络状态。
- *
- */
-- (void)onConnectionStatus:(enum AVDConnectionStatus)status;
-
 @end
 
 
@@ -121,6 +159,7 @@
  * @sa User
  */
 - (AVDResult) joinWithUser:(AVDUser*)user password:(NSString*)password delegate:(id<AVDRoomJoinDelegate>)joinresult;
+- (AVDResult) joinWithUser:(AVDUser*)user password:(NSString*)password delegate:(id<AVDRoomJoinDelegate>)joinresult oemToken:(NSString*)token;
 
 /** 当前用户离开房间
  *
@@ -231,7 +270,32 @@
  * @return 返回错误代码。
  */
 - (AVDResult) updateAppData:(NSString*)key value:(NSString*)value;
+/** 创建模拟设备Id，在导入音视频时可用
+ *
+ * @param[in] &fakeId 自定义Id。
+ * @return 模拟设备Id。
+ * @note 模拟摄像头信息，接口会生成deviceId，生成规则："userId_"+（用户输入的fakeId), 此处deviceId不能包含'_'和'{'、'}'此三个字符。
+ * @sa previewLocalCamera
+ * @sa publishLocalCamera
+ */
+- (AVDDeviceId) createFakeDeviceID:(AVDDeviceId)fakeId;
 
+//
+/** 设置房间选项
+ *
+ * @param[in] type 房间选项类型。
+ * @param[in] svalue 房间选项值。
+ *
+ * @return 返回错误代码。
+ */
+- (AVDResult) setOption:(enum AVDRoomOption)type value:(NSString*)svalue;
+/** 获取房间选项
+ *
+ * @param[in] type 房间选项类型。
+ *
+ * @return 返回房间选项值。
+ */
+- (NSString*) getOption:(enum AVDRoomOption)type;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // Disallow init and don't add to documentation

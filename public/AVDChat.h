@@ -21,6 +21,7 @@
  */
 @protocol AVDChatDelegate<NSObject>
 
+@optional
 /// 通知
 /** 接收到公聊消息通知
  *

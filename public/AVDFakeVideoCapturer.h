@@ -23,6 +23,7 @@ enum AVDFourccType
 
 @protocol AVDFakeVideoCapturerDelegate<NSObject>
 
+@optional
 /// 通知
 /** 视频流采集开始回调接口
  *

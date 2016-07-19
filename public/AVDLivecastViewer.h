@@ -12,11 +12,42 @@
 #import "AVDLivecast.h"
 
 /**
+ * 直播观众回调接口类
+ *
+ * 直播观众回调接口定义了直播观众的rtmp播放和对接切换等相关通知。
+ */
+@protocol AVDLivecastViewerDelegate<NSObject>
+
+@required
+/// 异步返回
+/** 连麦操作异步返回
+ *
+ * @param[in] result 错误代码。
+ * @sa dialogue
+ */
+- (void) onDialogueResult:(Result)result;
+
+@optional
+/// 通知
+/** 直播RTMP播放状态通知
+ *
+ * @param[in] url 直播rtmp连接。
+ */
+- (void) onRtmpPlay:(NSString*)url;
+/** 直播对讲状态通知
+ */
+- (void) onRtmpStop;
+
+@end
+
+/**
  * 直播观众接口类
  *
  * 直播观众接口定义了直播观众对象创建、直播观看和连麦操作。
  */
 @interface AVDLivecastViewer : AVDLivecast
+
+@property (nonatomic,weak) id <AVDLivecastViewerDelegate>delegate2;    /**< 直播回调代理 */
 
 /** 获取或创建直播观众房间对象
  *

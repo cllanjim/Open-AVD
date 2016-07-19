@@ -62,6 +62,7 @@ enum AVDEngineOption
 	*/
 @protocol AVDEngineDelegate<NSObject>
 
+@required
 /// 异步返回
 /** 初始化引擎操作异步返回
  *
@@ -76,6 +77,7 @@ enum AVDEngineOption
  */
 - (void) onUninitResult:(AVDResult)result;
 
+@optional
 /** 获取房间信息操作异步返回
  *
  * @param[in] result 获取房间错误代码。

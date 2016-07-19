@@ -22,6 +22,7 @@
  */
 @protocol AVDAudioDelegate<NSObject>
 
+@required
 /// 通知
 /** 麦克风状态更改通知
  *
@@ -32,6 +33,8 @@
  * @sa closeMicrophone
  */
 - (void) onMicrophoneStatusNotify:(enum AVDDeviceStatus)status fromUser:(AVDUserId) fromId;
+
+@optional
 /** 语音激励通知
  *
  * @param[in] info 语音激励信息。

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.author           = { "honggf" => "554225932@qq.com" }
   s.source           = { :git => "https://github.com/honggf/Open-AVD.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '8.4'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   # s.public_header_files = "public/*.h"
@@ -29,7 +29,6 @@ Pod::Spec.new do |s|
 
   s.subspec "precompiled" do |ss|
     ss.preserve_paths         = "public/*.h", 'lib/*.a'
-    ss.vendored_libraries   = 'lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/avd_sdk/public" }
+    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "/work/code/gitwork" }
   end
 end

@@ -24,6 +24,7 @@
  */
 @protocol AVDVideoDelegate<NSObject>
 
+@required
 /// 通知
 /** 摄像头状态更改通知
  *
@@ -32,6 +33,8 @@
  * @note 当摄像头状态更改后，房间内所有用户接收到此通知。
  */
 - (void) onCameraStatusNotify:(enum AVDDeviceStatus)status deviceId:(AVDDeviceId)fromId;
+
+@optional
 /** 摄像头数据更改通知
  *
  * @param[in] level 摄像头整形数据。
@@ -171,6 +174,18 @@
  * @sa CameraType
  */
 - (AVDResult) previewLocalCamera:(enum AVDCameraType)type render:(id<AVDVideoRenderer>)render;
+/** 预览模拟摄像头视频
+ *
+ * @param[in,out] &fakeDevice 模拟摄像头信息，接口会生成deviceId，生成规则："userId_"+（用户输入的deviceId), 此处deviceId不能包含'_'和'{'、'}'此三个字符。
+ * @param[in] *capture 模拟摄像头视频输入接口。
+ * @param[in] *render 显示对象接口指针
+ * @return 返回错误代码。
+ * 模拟摄像头用于在房间中导入特定已经存在的视频数据流，比如视频文件、录播系统视频流等。
+ * @sa FakeVideoCapturer
+ * @note render 允许被设置为NULL。
+ * @note fakeDevice.id 会按照3tee设备id规则重新构造成。
+ */
+- (AVDResult) previewLocalCamera:(AVDCamera*)fakeDevice capturer:(AVDFakeVideoCapturer*)capturer render:(id<AVDVideoRenderer>)render;
 /** 发布特定类型摄像头视频
  *
  * @param[in] type 摄像头类型。

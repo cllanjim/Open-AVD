@@ -12,6 +12,8 @@
 #import "AVDCommon.h"
 #import "AVDUserManager.h"
 #import "AVDVideoRenderer.h"
+#import "AVDFakeVideoCapturer.h"
+#import "AVDRoom.h"
 
 /** 客户端直播状态定义 */
 enum AVDLivecastStatus {
@@ -45,7 +47,6 @@ enum AVDLivecastStatus {
  */
 @interface AVDLivecast : NSObject
 
-
 @property (nonatomic,weak) id <AVDLivecastDelegate>delegate;    /**< 直播回调代理 */
 
 /** 释放直播房间对象
@@ -68,18 +69,34 @@ enum AVDLivecastStatus {
 
 /** 判断是否连麦状态
  */
-- (AVDResult) isDialogue;
-/** 挂断连麦对话
- * @note 主播和连麦观众都可以挂断对话
+- (BOOL) isDialogue;
+/** 判断是否主播对象
  */
-- (AVDResult) hangup;
-
+- (BOOL) isMainBroadcaster;
 /** 获取用户管理接口
  * @sa IMUserManager
  */
 - (AVDUserManager*) getUserManager;
 
-// 控制接口 mute...
+/** 挂断连麦对话
+ * @note 主播和连麦观众都可以挂断对话
+ */
+- (AVDResult) hangup;
+
+/// 控制接口, switch, mute...
+/** 直播切换摄像头
+ *
+ * @return 返回错误代码。
+ */
+- (AVDResult) switchCamera;
+
+/** 开启直播（主播）或对讲（观众）前: 设置视频的输入数据源
+ *
+ * @param[in] *vcapturer 视频的输入数据源。
+ * @return 返回错误代码。
+ * @sa FakeVideoCapturer
+ */
+- (AVDResult) setVideoSource:(AVDFakeVideoCapturer*)vcapturer;
 
 //
 /** 重置房间中网络连接
@@ -88,19 +105,19 @@ enum AVDLivecastStatus {
  * @return 返回错误代码。
  */
 - (AVDResult) reConnect;
-///** 设置房间选项
-// *
-// * @param[in] type 房间选项类型。
-// * @param[in] value 选项内容，根据选项说明填入。
-// * @return 返回错误代码。
-// */
-//- (AVDResult) setOption:(RoomOption)type value:(NSString*)svalue;
-///** 获取房间选项
-// *
-// * @param[in] type 房间选项类型。
-// * @return 返回选项内容，根据选项说明解析。
-// */
-//- (NSString*) getOption:(RoomOption)type;
+/** 设置房间选项
+ *
+ * @param[in] type 房间选项类型。
+ * @param[in] value 选项内容，根据选项说明填入。
+ * @return 返回错误代码。
+ */
+- (AVDResult) setOption:(enum AVDRoomOption)type value:(NSString*)svalue;
+/** 获取房间选项
+ *
+ * @param[in] type 房间选项类型。
+ * @return 返回选项内容，根据选项说明解析。
+ */
+- (NSString*) getOption:(enum AVDRoomOption)type;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // Disallow init and don't add to documentation
