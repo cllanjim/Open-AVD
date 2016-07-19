@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Open-AVD"
-  s.version          = "1.0.2"
+  s.version          = "1.0.3"
   s.summary          = "3Tee Open-AVD SDK for ios, audio video and data communication"
   s.homepage         = "https://github.com/honggf/Open-AVD"
   s.license          = 'MIT'
@@ -25,11 +25,8 @@ Pod::Spec.new do |s|
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z", "bz2", "iconv"
 
-  s.default_subspec = "precompiled"
+  s.preserve_paths         = "public/*.h", 'lib/*.a'
+  s.vendored_libraries   = 'lib/*.a'
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/lib" }
 
-  s.subspec "precompiled" do |ss|
-    ss.preserve_paths         = "public/*.h", 'lib/*.a'
-    ss.vendored_libraries   = 'lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/lib" }
-  end
 end

@@ -25,7 +25,7 @@
  * @param[in] result 错误代码。
  * @sa dialogue
  */
-- (void) onDialogueResult:(Result)result;
+- (void) onDialogueResult:(AVDResult)result;
 
 @optional
 /// 通知
