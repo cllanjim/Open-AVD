@@ -36,6 +36,8 @@ enum AVDCodecType {
  */
 @interface AVDPublishVideoOptions : NSObject
 
+- (instancetype) initWithCapability:(AVDCameraCapability*)cap codec:(enum AVDCodecType)codec;
+//
 - (BOOL) hasQuality:(enum AVDQualityType)value;
 //
 - (enum AVDRatioType) getRatio;

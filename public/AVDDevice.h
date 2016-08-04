@@ -30,6 +30,7 @@ enum AVDDeviceStatus
 @property(nonatomic, strong, readonly) NSString* name;      /**< 设备名称，应用层可用于设备显示  */
 @property(nonatomic, assign) enum AVDDeviceStatus status;   /**< 设备状态  */
 
+- (instancetype) initWithId:(AVDDeviceId)did name:(NSString*)name;
 /**
  * 判断设备对象是否有效 */
 - (BOOL) isValid;

@@ -19,6 +19,7 @@ enum AVDFourccType
     ft_I420,
     ft_YV12,
     ft_NV21,
+    ft_NV12,
 };
 
 @protocol AVDFakeVideoCapturerDelegate<NSObject>

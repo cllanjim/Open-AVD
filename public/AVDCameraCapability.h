@@ -15,6 +15,8 @@
 	*/
 @interface AVDCameraCapability : NSObject
 
+- (instancetype) initWithWidth:(NSInteger)w height:(NSInteger)h fps:(NSInteger)fps;
+
 @property(nonatomic, assign) NSInteger width;           /**< 视频宽度  */
 @property(nonatomic, assign) NSInteger height;          /**< 视频高度  */
 @property(nonatomic, assign) NSInteger maxFPS;          /**< 视频帧率  */

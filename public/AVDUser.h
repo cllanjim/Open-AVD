@@ -26,7 +26,7 @@
 @property(nonatomic, strong) NSString* userData;                /**< 用户数据，应用层设置  */
 
 
-- (id) initWithUserId:(NSString*) userId userName:(NSString*) userName userData:(NSString*) userData;
+- (instancetype) initWithUserId:(NSString*)userId userName:(NSString*)userName userData:(NSString*)userData;
 
 /**
  * 判断用户对象是否有效 */

@@ -40,6 +40,9 @@ enum AVDScalingType {
 - (void)setScalingType:(enum AVDScalingType)value;
 - (enum AVDScalingType)getScalingType;
 
+- (void)setVideoId:(NSString*)videoId;
+- (NSString*)getVideoId;
+
 @end
 
 @protocol AVDVideoRendererCallBacks<NSObject>

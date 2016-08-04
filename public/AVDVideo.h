@@ -160,6 +160,15 @@
  * @sa onUnpublishLocalResult
  */
 - (AVDResult) unpublishLocalCamera;
+/** 取消发布摄像头视频
+ *
+ * @param[in] &deviceId 摄像头Id，唯一标示一路摄像头视频。
+ * @return 返回错误代码。
+ * @note 取消发布操作为异步操作，操作结果在 onUnpublishLocalResult 中返回。
+ * @sa onUnpublishLocalResult
+ */
+- (AVDResult) unpublishLocalCamera:(AVDDeviceId)deviceId;
+
 /** 判断是否已经打开本地摄像头
  */
 - (BOOL) ispublishLocalCamera;
@@ -183,9 +192,15 @@
  * 模拟摄像头用于在房间中导入特定已经存在的视频数据流，比如视频文件、录播系统视频流等。
  * @sa FakeVideoCapturer
  * @note render 允许被设置为NULL。
- * @note fakeDevice.id 会按照3tee设备id规则重新构造成。
+ *       fakeDevice.id 会按照3tee设备id规则重新构造成。
+ * 注意：此函数必须用 unpreviewLocalCamera(String deviceId)来取消发布，不能用无参数函数；
  */
 - (AVDResult) previewLocalCamera:(AVDCamera*)fakeDevice capturer:(AVDFakeVideoCapturer*)capturer render:(id<AVDVideoRenderer>)render;
+/** 取消预览摄像头视频
+ * @param[in] &deviceId 摄像头Id。
+ * @return 返回错误代码。
+ */
+- (AVDResult) unpreviewLocalCamera:(AVDDeviceId)deviceId;
 /** 发布特定类型摄像头视频
  *
  * @param[in] type 摄像头类型。
@@ -201,6 +216,7 @@
  * @return 返回错误代码。
  * @note 发布操作为异步操作，操作结果在 onPublishLocalResult 中返回。
  * 模拟摄像头用于在房间中导入特定已经存在的视频数据流，比如视频文件、录播系统视频流等。
+ * 注意：此函数必须用 unpreviewLocalCamera(String deviceId)来取消发布，不能用无参数函数；
  * @sa onPublishLocalResult
  * @sa FakeVideoCapturer
  */
@@ -367,6 +383,18 @@
  */
 - (AVDResult) clearMixerVideos;
 
+
+- (AVDDeviceId) getLocalDefaultCameraId;
+
+/** 设置视频动态码率调整的范围，最小和最大比特率，
+ *
+ * @param[in] & deviceId 视频设备对应ID。
+ * @param[in] minBitramteBps 最小比特率。
+ * @param[in] maxBitrateBps 最大比特率。
+ * @return 返回错误代码。
+ * @note 例如30k/s = 30*8*1000 bps(bits/s)。当min和max相等时，码率固定，将不会动态调整。
+ */
+- (AVDResult) setVideoBitrate:(AVDDeviceId)deviceId min:(NSInteger)minBitrateBps max:(NSInteger)maxBitrateBps;
 
 // setting video param
 
