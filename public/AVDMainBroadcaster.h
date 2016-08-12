@@ -66,18 +66,19 @@
  * @return 返回错误代码。
  */
 - (AVDResult) kickoutUser:(AVDResult)reason userId:(AVDUserId)userId;
-/** Overlay自动布局，设置布局参数
- *
- * @param[in] isTopdown Overlay视频在主视频上的排列顺序，true: 从上往下排列； false: 从下往上排列
- * @param[in] scale	   Overlay视频合屏时采用的拉伸方式，参考ScaleType
- * @param[in] w Overlay视频在主视频的宽度比例，取值0.0~1.0，内部取值为：width (主视频）x W
- * @param[in] h Overlay视频在主视频的高度比例，取值0.0~1.0，内部取值为：height(主视频）x H
- * @param[in] x_begin Overlay初始视频在主视频的左上角左边位置，即x坐标，取值0.0~1.0，内部取值为：width (主视频）x x_begin
- * @param[in] y_begin Overlay初始视频在主视频的左上角上边位置，即y坐标，取值0.0~1.0，内部取值为：height(主视频）x y_begin
- * @return 返回错误代码。
- * @note 缺省设置为：Overlay视频从下往上排列; w=h=0.3f; x_begin=0.7f; y_begin=0.7f;
- */
-- (AVDResult) setSubVideoParams:(BOOL)isTopdown scale:(enum AVDScalingType)scale w:(float)w h:(float)h x_begin:(float)x_begin y_begin:(float)y_begin;
+
+///** Overlay自动布局，设置布局参数
+// *
+// * @param[in] isTopdown Overlay视频在主视频上的排列顺序，true: 从上往下排列； false: 从下往上排列
+// * @param[in] scale	   Overlay视频合屏时采用的拉伸方式，参考ScaleType
+// * @param[in] w Overlay视频在主视频的宽度比例，取值0.0~1.0，内部取值为：width (主视频）x W
+// * @param[in] h Overlay视频在主视频的高度比例，取值0.0~1.0，内部取值为：height(主视频）x H
+// * @param[in] x_begin Overlay初始视频在主视频的左上角左边位置，即x坐标，取值0.0~1.0，内部取值为：width (主视频）x x_begin
+// * @param[in] y_begin Overlay初始视频在主视频的左上角上边位置，即y坐标，取值0.0~1.0，内部取值为：height(主视频）x y_begin
+// * @return 返回错误代码。
+// * @note 缺省设置为：Overlay视频从下往上排列; w=h=0.3f; x_begin=0.7f; y_begin=0.7f;
+// */
+//- (AVDResult) setSubVideoParams:(BOOL)isTopdown scale:(enum AVDScalingType)scale w:(float)w h:(float)h x_begin:(float)x_begin y_begin:(float)y_begin;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // Disallow init and don't add to documentation

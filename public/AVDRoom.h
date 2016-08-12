@@ -21,32 +21,51 @@
  */
 enum AVDRoomOption{
     ro_video_drop_data,					/**< 值类型为bool, 字符类型为"true" or "false"：表示接收到视频数据后不解码直接丢弃，一般用于模拟客服端做并发测试。
-                                         默认值为false，设置为true后将丢弃该房间所有接收到的视频数据。
-                                         */
-    ro_audio_drop_data,					/**< 值类型为bool, 字符类型为"true" or "false"：表示接收到音频数据后不解码直接丢弃，一般用于模拟客服端做并发测试。
-                                         默认值为false，设置为true后将丢弃该房间所有接收到的音频数据。
-                                         */
-    ro_media_use_dtls,					/**< 值类型为bool, 字符类型为"true" or "false"：表示音视频是否启用DTLS加密，DTLS加密数据更加安全，但是会加重Server
-                                         * 的负担，在UDP丢包严重的网络环境下，媒体链接需要的时间会更多（30%丢包，链接时间10s-40s）。
-                                         * 默认值为true，使用的是DTLS加密方式。
-                                         */
-    ro_room_reconnect_times,			/**< 值类型为int32, 字符类型为"3" or "2"等数字字符：设置每次断线后重连次数。系统默认为重连3次，如需改变需要应用层自己设置。
-                                         */
-    ro_room_connect_timeout,			/**< 值类型为uint32,  字符类型为"3000" or "5000" ：设置链接超时时间，单位毫秒，必须是正数，系统默认是5000毫秒。
-                                         */
-    ro_audio_subscribe_mode,			/**< 值类型为string, 音频订阅模式：字符类型为"autosubscribe" or "nosubscribe"：分别表示自动订阅房间中全部打开的音频 comming soon
-                                         * or 不自动订阅音频；缺省为"autosubscribe"自动订阅模式。
-                                         */
-    ro_audio_option_codec,				/**< 值类型为string, 音频编码算法：字符类型为"isac" or "opus"：分别表示isac语音编码 和 opus音乐编码；缺省为"isac"。 comming soon
-                                         */
-    ro_video_codec_hw_priority,			/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中是否优先使用硬件编码：优先使用硬件编码(true)和优先使用软件编码（false），
-                                         缺省为UDP优先。
-                                         */
-    
-    ro_audio_mixerdata_callback_buffered,/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中混音数据回调是否缓冲为1024sample后回调：缓冲(true)和不缓冲（false），
-                                          缺省为缓冲。
-                                          */
-    ro_video_mixerdata_callback_format, /**< 值类型为MediaCodecInfo.CodecCapabilities中的枚举值, 字符类型为枚举值的字符串，目前支持一下："19" - YUV420Planar or "21" - YUV420SemiPlanar：表示房间中合屏数据回调的格式。缺省为 "19"
+										 * 默认值为false，设置为true后将丢弃该房间所有接收到的视频数据。
+										 * 必须在join调用之前设置才有效。
+										 */
+	ro_audio_drop_data,					/**< 值类型为bool, 字符类型为"true" or "false"：表示接收到音频数据后不解码直接丢弃，一般用于模拟客服端做并发测试。
+										 * 默认值为false，设置为true后将丢弃该房间所有接收到的音频数据。
+										 * 必须在join调用之前设置才有效。
+										 */
+	ro_media_use_dtls,					/**< 值类型为bool, 字符类型为"true" or "false"：表示音视频是否启用DTLS加密，DTLS加密数据更加安全，但是会加重Server
+										 * 的负担，在UDP丢包严重的网络环境下，媒体链接需要的时间会更多（30%丢包，链接时间10s-40s）。
+										 * 默认值为true，使用的是DTLS加密方式。
+										 * 必须在join调用之前设置才有效。
+										 */
+	ro_room_reconnect_times,			/**< 值类型为int32, 字符类型为"3" or "2"等数字字符：设置每次断线后重连次数。系统默认为重连3次，如需改变需要应用层自己设置。
+										 * 在join之前或者之后设置都有效。
+										 */
+	ro_room_connect_timeout,			/**< 值类型为uint32,  字符类型为"3000" or "5000" ：设置链接超时时间，单位毫秒，必须是正数，系统默认是5000毫秒。
+										 * 在join之前或者之后设置都有效。
+										 */
+	ro_audio_subscribe_mode,			/**< 值类型为string, 音频订阅模式：字符类型为"autosubscribe" or "nosubscribe"：分别表示自动订阅房间中全部打开的音频 
+										 * or 不自动订阅音频；缺省为"autosubscribe"自动订阅模式。
+										 * 未实现。
+										 */
+	ro_audio_option_codec,				/**< 值类型为string, 音频编码算法：字符类型为"isac" or "opus"：分别表示isac语音编码 和 opus音乐编码；缺省为"isac"。
+										 * 必须在join调用之前设置才有效。
+										 */
+	ro_video_codec_hw_priority,			/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中是否优先使用硬件编码：优先使用硬件编码(true)和优先使用软件编码（false），
+										 * 缺省为UDP优先。
+										 * 未实现。
+										 */
+	ro_audio_mixerdata_callback_buffered,/**< 值类型为bool, 字符类型为"true" or "false"：表示房间中混音数据回调是否缓冲为1024sample后回调：缓冲(true)和不缓冲（false），
+										  *	缺省为缓冲。
+										  * 在join之前或者之后设置都有效。
+										  */
+	ro_video_default_camera,			/**< 值类型为枚举CameraType, 字符类型为"front" or "back"：表示前后置摄像头模式时房间中默认使用的摄像头：前置(front)和后置（back），
+										 *	缺省为前置。
+										 * 必须在join调用之前设置才有效。
+										 */
+	ro_room_auto_rejoin,				/**< 值类型为int32, 字符类型为"true" or "false"：在重连失败之后是否尝试自动重新加入房间，系统默认为true。
+										 * 在join之前或者之后设置都有效。
+										 */
+	ro_room_rejoin_times,				/**< 值类型为uint32, 字符类型为"3" or "2"等数字字符：设置断线重连失败后自动加入的次数，在启用ro_room_auto_rejoin为true后有效。
+										 * 系统默认为3，尝试3次重新加入，如果都失败将通过onConnectionStatus接口返回cs_connectFailed状态。
+										 * 在join之前或者之后设置都有效。
+										 */
+	ro_video_mixerdata_callback_format, /**< 值类型为MediaCodecInfo.CodecCapabilities中的枚举值, 字符类型为枚举值的字符串，目前支持一下："19" - YUV420Planar or "21" - YUV420SemiPlanar：表示房间中合屏数据回调的格式。缺省为 "19"
                                          */
 };
 

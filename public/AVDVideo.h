@@ -344,10 +344,18 @@
  *
  * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。
  * @return 返回错误代码。
- * @sa setMixerMainVideo
- * @sa addMixerOverlayVideo
+ * @note 设置混屏的主视频等效于，setMixerVideoSize为主视频大小，同时addMixerOverlayVideo将主视频加入到混屏中，且充满全屏。
  */
 - (AVDResult) setMixerMainVideo:(AVDDeviceId)deviceId;
+/** 设置混频后视频数据的尺寸
+ *
+ * @param[in] width 视频图像宽。
+ * @param[in] height 视频图像高。
+ * @param[in] &background 背景图。
+ * @return 返回错误代码。
+ * @sa addMixerOverlayVideo
+ */
+- (AVDResult) setMixerVideoSize:(NSUInteger)width height:(NSUInteger)height background:(NSString*)background;
 /** 添加视频到主视频特定位置
  *
  * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。

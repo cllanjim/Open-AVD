@@ -10,6 +10,7 @@
 #define avd_sdk_AVDLivecastViewer_h
 
 #import "AVDLivecast.h"
+#import "AVDVideoRenderer.h"
 
 /**
  * 直播观众回调接口类
@@ -56,6 +57,8 @@
  */
 + (AVDLivecastViewer* ) obtain:(AVDRoomId)roomID;
 
+- (instancetype) initWithRoomId:(AVDRoomId)roomID;
+
 /** 设置直播观众房间主播Id
  *
  *@note 获取直播房间对象后需要设置，以便连麦时内部使用
@@ -75,6 +78,14 @@
  * @sa onDialogueResult
  */
 - (AVDResult) dialogue;
+
+/// for detail viewer imp
+/** 获取直播播放地址
+ */
+- (NSString*) getPlayUrl;
+/** 获取对讲视频显示对象
+ */
+- (id<AVDVideoRenderer>) getRender;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // Disallow init and don't add to documentation

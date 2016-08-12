@@ -79,7 +79,7 @@ enum AVDFourccType
  *	Err_Invalid_Arg				参数不合法，可忽略
  *	Err_Wrong_Status			状态不对，可忽略
  */
-- (AVDResult) inputCapturedFrame:(NSData*)data w:(NSInteger)w h:(NSInteger)h rotation:(NSInteger)rotation;
+- (AVDResult) inputCapturedFrame:(NSData*)data w:(NSInteger)w h:(NSInteger)h rotation:(NSInteger)rotation mirror:(BOOL)mirror;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
