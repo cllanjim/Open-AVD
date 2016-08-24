@@ -18,7 +18,7 @@ enum AVDModuleType
     mt_audio,                                                   /**< 语音模块类型  */
     mt_video,                                                   /**< 视频模块类型  */
     mt_screen,                                                  /**< 屏幕共享模块类型  */
-    mt_livecast,                                                /**< 直播模块类型  */
+
 };
 
 @interface AVDModule : NSObject

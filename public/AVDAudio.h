@@ -75,10 +75,10 @@ enum AVDSpeakerMode {
 - (void) onAudioParam:(NSUInteger)sampleRate channels:(NSUInteger)channels;
 /** 音频数据回调接口
  * @param[in] data 数据存储。
- * @param[in] pts 时间搓。
+ * @param[in] timestamp_ns 时间戳, nanos second。
  * @sa Room.Option.ro_audio_mixerdata_callback_buffered 单次混音数据回调“10ms数据”还是“1024samples数据”
  */
-- (void) onAudioData:(NSData*)data pts:(NSInteger)pts;
+- (void) onAudioData:(NSData*)data pts:(NSInteger)timestamp_ns;
     
 @end
 

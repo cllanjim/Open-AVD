@@ -368,6 +368,18 @@
  * @sa addMixerOverlayVideo
  */
 - (AVDResult) addMixerOverlayVideo:(AVDDeviceId)deviceId zorder:(NSUInteger)zorder x:(CGFloat)x y:(CGFloat)y w:(CGFloat)w h:(CGFloat)h;
+/** 添加视频到主视频特定位置
+ *
+ * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。
+ * @param[in] zorder 多个视频覆盖时，前后位置，zorder越小，视频越在下层，会被覆盖；取值0-10
+ * @param[in] x 此视频在左上角左边位置，即x坐标，
+ * @param[in] y 此视频在左上角上边位置，即y坐标，
+ * @param[in] w 此视频宽度
+ * @param[in] h 此视频高度
+ * @return 返回错误代码。
+ * @sa addMixerOverlayVideo
+ */
+- (AVDResult) addMixerOverlayVideoPixel:(AVDDeviceId)deviceId zorder:(NSUInteger)zorder x:(NSUInteger)x y:(NSUInteger)y w:(NSUInteger)w h:(NSUInteger)h;
 /** 更新附加视频在主视频上显示的位置
  *
  * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。
@@ -379,6 +391,17 @@
  * @return 返回错误代码。
  */
 - (AVDResult) updateMixerOverlayVideo:(AVDDeviceId)deviceId zorder:(NSUInteger)zorder x:(CGFloat)x y:(CGFloat)y w:(CGFloat)w h:(CGFloat)h;
+/** 更新附加视频在主视频上显示的位置
+ *
+ * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。
+ * @param[in] zorder 多个视频覆盖时，前后位置，zorder越小，视频越在下层，会被覆盖；取值0-10
+ * @param[in] x 此视频在左上角左边位置，即x坐标，
+ * @param[in] y 此视频在左上角上边位置，即y坐标，
+ * @param[in] w 此视频宽度
+ * @param[in] h 此视频高度
+ * @return 返回错误代码。
+ */
+- (AVDResult) updateMixerOverlayVideoPixel:(AVDDeviceId)deviceId zorder:(NSUInteger)zorder x:(NSUInteger)x y:(NSUInteger)y w:(NSUInteger)w h:(NSUInteger)h;
 /** 移除主视频上的某一视频
  *
  * @param[in] &deviceId 摄像头Id，唯一标示一路共享的摄像头视频。

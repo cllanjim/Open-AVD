@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 t3ee. All rights reserved.
 //
 
-#ifndef avd_sdk_AVDFakeVideoCapturer_h
-#define avd_sdk_AVDFakeVideoCapturer_h
+#ifndef avd_sdk_AVDFakeAudioCapturer_h
+#define avd_sdk_AVDFakeAudioCapturer_h
 
 #import "AVDCommon.h"
 
@@ -41,6 +41,7 @@
 
 /** 给Capturer输入PCM原始数据
  *
+ * @param[in] timestamp_ns 时间戳, nanos second。
  * @param[in] samplerates 音频采样率
  * @param[in] channels 音频采集通道数
  * @param[in] sample  音频内容数据指针
@@ -50,7 +51,7 @@
  *	Err_Invalid_Arg				参数不合法，可忽略
  *	Err_Wrong_Status			状态不对，可忽略
  */
-- (AVDResult) inputCapturedFrame:(NSData*)data sampleRate:(NSInteger)sampleRate channels:(NSInteger)channels;
+- (AVDResult) inputCapturedFrame:(NSData*)data sampleRate:(NSInteger)sampleRate channels:(NSInteger)channels pts:(NSInteger)pts;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

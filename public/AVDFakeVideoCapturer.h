@@ -67,19 +67,20 @@ enum AVDFourccType
 
 /** 给Capturer输入原始图像
  *
+ * @param[in] timestamp_ns 时间戳, nanos second。
  * @param[in] format 原始图像格式，见FourCC枚举
  * @param[in] w 图像宽度
  * @param[in] h 图像高度
  * @param[in] sample  图像内容数据指针
  * @param[in] sample_size 图像内容大小
- * @param[in] rotation 图像角度，取值：0,90,180,270
+ * @param[in] rotation 图像需要旋转的角度，顺时针方向，取值：0,90,180,270
  * @return 返回错误代码：
  * 	AVD_OK						成功
  * 	RTC_ERR_VIDEO_CONVERT_FAILED	转换图像格式失败，有可能是内存分配失败，可考虑重启程序。
  *	Err_Invalid_Arg				参数不合法，可忽略
  *	Err_Wrong_Status			状态不对，可忽略
  */
-- (AVDResult) inputCapturedFrame:(NSData*)data w:(NSInteger)w h:(NSInteger)h rotation:(NSInteger)rotation mirror:(BOOL)mirror;
+- (AVDResult) inputCapturedFrame:(NSData*)data w:(NSInteger)w h:(NSInteger)h rotation:(NSInteger)rotation mirror:(BOOL)mirror pts:(NSInteger)pts;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

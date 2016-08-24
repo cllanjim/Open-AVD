@@ -53,6 +53,13 @@ enum AVDEngineOption
     data_channel_tcp_priority,          /**< 值类型为bool, 字符类型为"true" or "false"：表示房间中数据通道用的网络连接类型：TCP优先(true)和UDP优先（false），
                                          缺省为UDP优先。
                                          */
+    eo_network_proxy,					/**< 值类型为bool, 字符类型为"true" or "false"：表示启用或不启用，建议局域网或者简单的环境不使用代理。
+                                         当前系统默认参数值为：true。
+                                         */
+    eo_video_resolution_16balign,		/**< 值类型为bool, 字符类型为"true" or "false"：表示启用或不启用视频分辨率16字节严格对齐模式；在16字节对齐模式下，分辨率的宽和高都会向对齐的分辨率靠，
+                                         如1080-->1088,540-->544,180-->176等，有些硬件设备（某些android手机）只支持16字节对齐的硬件编解码，android上可以考虑开启此选项来做更好的设备兼容性和编码效率。
+                                         当前系统默认参数值为：false。
+                                         */
 };
 
 /**
