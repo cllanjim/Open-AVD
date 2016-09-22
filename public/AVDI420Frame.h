@@ -30,6 +30,7 @@
 // AVDI420Frame is an ObjectiveC version of cricket::VideoFrame.
 @interface AVDI420Frame : NSObject
 
+@property(nonatomic, readonly) long long timestamp;
 @property(nonatomic, readonly) NSUInteger width;
 @property(nonatomic, readonly) NSUInteger height;
 @property(nonatomic, readonly) NSUInteger chromaWidth;

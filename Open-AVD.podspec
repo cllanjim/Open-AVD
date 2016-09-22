@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Open-AVD"
-  s.version          = "1.0.7"
+  s.version          = "1.0.8"
   s.summary          = "3Tee Open-AVD SDK for ios, audio video and data communication"
   s.homepage         = "https://github.com/honggf/Open-AVD"
   s.license          = 'MIT'

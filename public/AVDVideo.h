@@ -14,6 +14,7 @@
 #import "AVDCamera.h"
 #import "AVDVideoRenderer.h"
 #import "AVDFakeVideoCapturer.h"
+#import "CoreVideo/CVPixelBuffer.h"
 
 @class AVDRoom;
 
@@ -420,8 +421,8 @@
 /** 设置视频动态码率调整的范围，最小和最大比特率，
  *
  * @param[in] & deviceId 视频设备对应ID。
- * @param[in] minBitramteBps 最小比特率。
- * @param[in] maxBitrateBps 最大比特率。
+ * @param[in] minBitramteBps 最小比特率,单位bps。
+ * @param[in] maxBitrateBps  最大比特率,单位bps。
  * @return 返回错误代码。
  * @note 例如30k/s = 30*8*1000 bps(bits/s)。当min和max相等时，码率固定，将不会动态调整。
  */
@@ -434,6 +435,9 @@
 - (id)init __attribute__((
     unavailable("init is not a supported initializer for this class.")));
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
+
+
++ (AVDResult) nv12ConvertPixelBuffer:(CVPixelBufferRef)pixelBuffer toData:(NSMutableData*)data;
 
 @end
 

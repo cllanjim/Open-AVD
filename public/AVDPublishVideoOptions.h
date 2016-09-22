@@ -26,7 +26,7 @@ enum AVDCodecType {
     codec_vp8,							/**< VP8编解码器类型  */
     codec_h264,							/**< H264编解码器类型  */
     codec_vp9,							/**< VP9编解码器类型  */
-    codec_default = codec_vp8,
+//    codec_default = codec_vp8,
 };
 
 /**

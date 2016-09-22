@@ -12,6 +12,8 @@
 #import "AVDRoomInfo.h"
 #import "AVDUser.h"
 #import "AVDUserManager.h"
+#import "AVDRoomStats.h"
+#import "AVDMediaStats.h"
 
 /** 房间选项
  *
@@ -298,6 +300,24 @@ enum AVDRoomOption{
  * @sa publishLocalCamera
  */
 - (AVDDeviceId) createFakeDeviceID:(AVDDeviceId)fakeId;
+
+/** 当前房间启用或关闭流量统计功能
+ * @param[in] isEnable 启用或关闭。
+ * @return 返回错误代码：
+ * 	AVD_OK						成功
+ */
+- (AVDResult) enableStats:(BOOL)isEnable;
+/** 获取房间的流量统计信息
+ * @return 返回房间流量统计信息。
+ * @sa RoomStats
+ */
+- (AVDRoomStats*) getRoomStats;
+/** 获取某路媒体（音频或者视频）的流量统计信息
+ * @param[in] deviceId 设备Id。
+ * @return 返回媒体统计信息。
+ * @sa MediaStats
+ */
+- (AVDMediaStats*) getMediaStats:(AVDDeviceId)deviceId;
 
 //
 /** 设置房间选项

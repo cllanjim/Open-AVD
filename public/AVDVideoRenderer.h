@@ -55,4 +55,10 @@ enum AVDScalingType {
 
 @end
 
+@protocol AVDFirstFrameCallBack<NSObject>
+
+- (void) onFirstFrameArrived:(id<AVDVideoRenderer>)render;
+
+@end
+
 #endif

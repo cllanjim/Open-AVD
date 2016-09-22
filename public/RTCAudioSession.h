@@ -1,10 +1,12 @@
-//
-//  RTCAudioSession.h
-//  avd_sdk
-//
-//  Created by skin on 15-9-19.
-//  Copyright (c) 2015年 t3ee. All rights reserved.
-//
+/*
+ *  Copyright 2016 The WebRTC Project Authors. All rights reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree. An additional intellectual property rights grant can be found
+ *  in the file PATENTS.  All contributing project authors may
+ *  be found in the AUTHORS file in the root of the source tree.
+ */
 
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
@@ -16,7 +18,7 @@ extern NSInteger const kRTCAudioSessionErrorLockRequired;
 
 @class RTCAudioSession;
 
-// Surfaces AVAudioSession events. Open-AVD will listen directly for notifications
+// Surfaces AVAudioSession events. WebRTC will listen directly for notifications
 // from AVAudioSession and handle them before calling these delegate methods,
 // at which point applications can perform additional processing if required.
 @protocol RTCAudioSessionDelegate <NSObject>
@@ -45,7 +47,7 @@ extern NSInteger const kRTCAudioSessionErrorLockRequired;
 
 /** Proxy class for AVAudioSession that adds a locking mechanism similar to
  *  AVCaptureDevice. This is used to that interleaving configurations between
- *  Open-AVD and the application layer are avoided. Only setter methods are
+ *  WebRTC and the application layer are avoided. Only setter methods are
  *  currently proxied. Getters can be accessed directly off AVAudioSession.
  *
  *  RTCAudioSession also coordinates activation so that the audio session is
@@ -119,6 +121,9 @@ extern NSInteger const kRTCAudioSessionErrorLockRequired;
  *  AVAudioSession.
  */
 - (BOOL)setActive:(BOOL)active
+            error:(NSError **)outError;
+- (BOOL)setActive:(BOOL)active
+            withOptions:(AVAudioSessionSetActiveOptions)options
             error:(NSError **)outError;
 
 // The following methods are proxies for the associated methods on

@@ -59,6 +59,9 @@ enum AVDFourccType
  * @return 视频采集器对象指针。
  */
 - (instancetype) initWithDelegate:(id <AVDFakeVideoCapturerDelegate>)delegate fourFormat:(enum AVDFourccType)fourFormat isScreen:(BOOL)isScreen;
+/** 释放房间对象
+ */
+- (void) destory;
 
 /** 判断Capturer是否正在运行
  * @return 是否在运行。

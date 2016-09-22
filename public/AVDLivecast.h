@@ -13,6 +13,7 @@
 #import "AVDUserManager.h"
 #import "AVDVideoRenderer.h"
 #import "AVDFakeVideoCapturer.h"
+#import "AVDFakeAudioCapturer.h"
 #import "AVDRoom.h"
 
 /** 客户端直播状态定义 */
@@ -97,6 +98,13 @@ enum AVDLivecastStatus {
  * @sa FakeVideoCapturer
  */
 - (AVDResult) setVideoSource:(AVDFakeVideoCapturer*)vcapturer;
+/** 开启直播（主播）或对讲（观众）前: 设置音频的输入数据源
+ *
+ * @param[in] *acapturer 音频的输入数据源。
+ * @return 返回错误代码。
+ * @sa FakeAudioCapturer
+ */
+- (AVDResult) setAudioSource:(AVDFakeAudioCapturer*)acapturer;
 
 //
 /** 重置房间中网络连接

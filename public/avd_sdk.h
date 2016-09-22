@@ -14,7 +14,7 @@ FOUNDATION_EXPORT double avd_sdkVersionNumber;
 //! Project version string for avd_sdk.
 FOUNDATION_EXPORT const unsigned char avd_sdkVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <avd_sdk/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <PublicHeader.h>
 #import <AVDCommon.h>
 #import <AVDEngine.h>
 #import <AVDRoomInfo.h>
@@ -48,4 +48,7 @@ FOUNDATION_EXPORT const unsigned char avd_sdkVersionString[];
 #import <AVDMainBroadcaster.h>
 #import <AVDFakeVideoCapturer.h>
 #import <AVDFakeAudioCapturer.h>
+#import <AVDNetworkStats.h>
+#import <AVDRoomStats.h>
+#import <AVDMediaStats.h>
 #import <RTCAudioSession.h>

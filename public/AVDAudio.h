@@ -182,10 +182,10 @@ enum AVDSpeakerMode {
  * @return 返回错误代码。
  * @sa AVDSpeakerMode
  */
-- (AVDResult) setSpeakerMode:(enum AVDSpeakerMode)mode;
++ (AVDResult) setSpeakerMode:(enum AVDSpeakerMode)mode;
 /** 获取耳麦模式
  */
-- (enum AVDSpeakerMode) getSpeakerMode;
++ (enum AVDSpeakerMode) getSpeakerMode;
 
 /** 开始播放声音文件
  * @param[in] *file 本地音频文件。
@@ -198,6 +198,15 @@ enum AVDSpeakerMode {
  * @return 返回错误代码。
  */
 - (AVDResult) stopVoice;
+
+/** 设置获取混音数据回调接口
+ * @param[in] listener 混音数据回调指针。
+ * @return 返回错误代码。
+ * @sa IMixerDataListener
+ * @sa ro_audio_mixerdata_callback_buffered 单次混音数据回调“10ms数据”还是“1024samples数据”
+ * @note 如果音视频同时混合出流，建议先设置视频，再设置音频的回调接口，有助于音视频时间戳对齐。
+ */
+- (AVDResult) setMixerDataListener:(id <AVDAudioMixerDataDelegate>)listener sampleRate:(NSInteger)sampleRate;
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

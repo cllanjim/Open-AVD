@@ -60,6 +60,27 @@ enum AVDEngineOption
                                          如1080-->1088,540-->544,180-->176等，有些硬件设备（某些android手机）只支持16字节对齐的硬件编解码，android上可以考虑开启此选项来做更好的设备兼容性和编码效率。
                                          当前系统默认参数值为：false。
                                          */
+    eo_video_swapwh_by_rotation,		/**< 值类型为bool, 字符类型为"true" or "false"：表示视频publish或preview时设置的分辨率根据输入视频旋转角度变换宽高：变换宽高(true)和不变换宽高严格按设置分辨率裁剪拉伸（false），
+                                         * 缺省为不变换宽高严格按设置分辨率裁剪拉伸。
+                                         * 未实现。
+                                         */
+    eo_video_codec_hw_priority,			/**< 值类型为bool, 字符类型为"true" or "false"：表示是否优先使用硬件编码：优先使用硬件编码(true)和优先使用软件编码（false），
+                                         * 缺省为硬件编码优先。
+                                         * 未实现。
+                                         */
+   	eo_audio_aec_LowLatencyModeDelayEstimate, /**< android系统可用；值类型为int, 取值：[30, 400]; 字符类型数值字符串如"50"：表示AEC延时下限，用于回音消除。
+                                               * 缺省为 80； 回音消除算法与设备的麦克风和扬声器距离，及会场大小都有关系，有可能需要特别调试。
+                                               */
+    eo_audio_aec_HighLatencyModeDelayEstimate, /**< android系统可用；值类型为int, 取值：[30, 400]; 字符类型数值字符串如"50"：表示AEC延时上限，用于回音消除。
+                                                * 缺省为 160； 回音消除算法与设备的麦克风和扬声器距离，及会场大小都有关系，有可能需要特别调试。
+                                                */
+    
+    eo_audio_agc_PlayoutGainMultipleValue, /**< 值类型为float, 取值：[0.1, 10.0]; 字符类型数值字符串如"2.0"：表示语音播放时的增益倍数。
+                                            * 缺省为 1.0。
+                                            */
+    /// for test
+    eo_test_rtc_string_1,
+    eo_test_rtc_int_1,
 };
 
 /**

@@ -74,6 +74,10 @@ enum AVDConnectionStatus
              maxVideo:(NSUInteger) maxVideo
              roomMode:(enum AVDRoomMode) mode;
 
+- (id) initWithMcuRoomId:(AVDRoomId) roomId
+             roomName:(NSString*) roomName
+            appRoomId:(NSString*) appRoomId;
+
 - (BOOL) isMcu;
 - (BOOL) isFree;
 - (BOOL) isTemperary;
